@@ -9,7 +9,7 @@ class BlendingSlider extends StatelessWidget {
   /// Returns an enum blendmode value on tap.
   final Function(BlendMode) onBlendModeSelected;
 
-  BlendingSlider({@required this.onBlendModeSelected});
+  BlendingSlider({required this.onBlendModeSelected});
 
   @override
   Widget build(BuildContext context) {

@@ -1,10 +1,12 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:flutter/material.dart';
 
 /// A Custom Slider that returns a selected color.
 
 class ColorSlider extends StatelessWidget {
   /// Map holding the color name with its value
-  final Map<String, Color> _colorMap = {
+  final Map<String, MaterialColor> _colorMap = {
     'Red': Colors.red,
     'Green': Colors.green,
     'Blue': Colors.blue,
@@ -57,16 +59,16 @@ class ColorSlider extends StatelessWidget {
   };
 
   /// Triggers when tapped on a color
-  final Function(Color) onColorSelected;
+  final Function(MaterialColor) onColorSelected;
 
-  ColorSlider({@required this.onColorSelected});
+  ColorSlider({required this.onColorSelected});
 
   @override
   Widget build(BuildContext context) {
     return ListView(
       scrollDirection: Axis.horizontal,
       children: [
-        ..._colorMap.entries.map((MapEntry<String, Color> colorEntry) {
+        ..._colorMap.entries.map((MapEntry<String, MaterialColor> colorEntry) {
           return InkWell(
             borderRadius: BorderRadius.circular(50.0),
             onTap: () => onColorSelected(colorEntry.value),

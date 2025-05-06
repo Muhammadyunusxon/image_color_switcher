@@ -19,13 +19,13 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   // Holds the BlendMode returned from [BlendingSlider]
-  BlendMode blendMode;
+  BlendMode? blendMode;
 
   // Holds the encoded color string value returned from [SVGColorSlider]
   String svgColorCode = '';
 
   // Holds the Color value returned from [ColorSlider]
-  Color colorCode;
+  MaterialColor? colorCode;
 
   @override
   Widget build(BuildContext context) {

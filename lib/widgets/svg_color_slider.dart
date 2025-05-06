@@ -30,7 +30,7 @@ class SVGColorSlider extends StatelessWidget {
   /// Triggers when tapped on a color
   final Function(String) onColorSelected;
 
-  SVGColorSlider({@required this.onColorSelected});
+  SVGColorSlider({required this.onColorSelected});
 
   @override
   Widget build(BuildContext context) {

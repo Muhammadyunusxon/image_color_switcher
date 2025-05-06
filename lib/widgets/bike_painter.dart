@@ -4,7 +4,7 @@ import 'package:flutter_svg/svg.dart';
 class BikePainter extends StatelessWidget {
   final String color, shade;
 
-  BikePainter({@required this.color, @required this.shade});
+  BikePainter({required this.color, required this.shade});
 
   @override
   Widget build(BuildContext context) {

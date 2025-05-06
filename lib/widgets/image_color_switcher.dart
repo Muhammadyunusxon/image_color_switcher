@@ -1,4 +1,4 @@
-import 'dart:typed_data';
+// ignore_for_file: deprecated_member_use
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:image/image.dart' as External;
@@ -10,7 +10,7 @@ class ImageColorSwitcher extends StatefulWidget {
   /// Holds the MaterialColor
   final MaterialColor color;
 
-  ImageColorSwitcher({this.imagePath, this.color});
+  ImageColorSwitcher({required this.imagePath, required this.color});
 
   @override
   _ImageColorSwitcherState createState() => _ImageColorSwitcherState();
@@ -18,7 +18,7 @@ class ImageColorSwitcher extends StatefulWidget {
 
 class _ImageColorSwitcherState extends State<ImageColorSwitcher> {
   /// Holds the Image in Byte Format
-  Uint8List imageBytes;
+   Uint8List? imageBytes;
 
   @override
   void initState() {
@@ -29,12 +29,13 @@ class _ImageColorSwitcherState extends State<ImageColorSwitcher> {
   }
 
   /// A function that switches the image Color.
-  Future<Uint8List> switchColor(Uint8List bytes) async {
+  Future<Uint8List?> switchColor(Uint8List bytes) async {
     // Decode the bytes to [Image] type
     final image = External.decodeImage(bytes);
+    if (image == null) return null;
 
     // Convert the [Image] to RGBA formatted pixels
-    final pixels = image.getBytes(format: External.Format.rgba);
+    final pixels = image.getBytes() ;
 
     // Get the Pixel Length
     final int length = pixels.lengthInBytes;
@@ -71,15 +72,15 @@ class _ImageColorSwitcherState extends State<ImageColorSwitcher> {
     return imageBytes == null
         ? Center(child: CircularProgressIndicator())
         : FutureBuilder(
-            future: switchColor(imageBytes),
-            builder: (_, AsyncSnapshot<Uint8List> snapshot) {
+            future: switchColor(imageBytes!),
+            builder: (_, snapshot) {
               return snapshot.hasData
                   ? Container(
                       width: MediaQuery.of(context).size.width * 0.9,
                       decoration: BoxDecoration(
                           image: DecorationImage(
                               image: Image.memory(
-                        snapshot.data,
+                        snapshot.data as Uint8List,
                       ).image)),
                     )
                   : CircularProgressIndicator();

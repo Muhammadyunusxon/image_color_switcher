@@ -18,7 +18,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.7.0 <3.0.0"
+  sdk: ">=3.0.0 <4.0.0"
 
 dependencies:
   flutter:
@@ -26,14 +26,14 @@ dependencies:
 
   # Provides server & web apps the ability to load, manipulate and save images
   # with various image file formats PNG, JPEG, GIF, BMP, WebP, TIFF, TGA, PSD, PVR, and OpenEXR
-  image: ^2.1.19
+  image: ^4.5.4
   
   # Allows painting & displaying Scalable Vector Graphics 1.1 files
-  flutter_svg: ^0.19.3
+  flutter_svg: ^2.1.0
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
-  cupertino_icons: ^1.0.2
+  cupertino_icons: ^1.0.8
 
 dev_dependencies:
   flutter_test:
