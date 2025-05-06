@@ -5,12 +5,13 @@ import 'package:image/image.dart' as External;
 
 class ImageColorSwitcher extends StatefulWidget {
   /// Holds the Image Path
-  final String imagePath;
+  final String? imagePath;
+  final String? networkImage;
 
   /// Holds the MaterialColor
   final MaterialColor color;
 
-  ImageColorSwitcher({required this.imagePath, required this.color});
+  ImageColorSwitcher({this.imagePath, required this.color, this.networkImage});
 
   @override
   _ImageColorSwitcherState createState() => _ImageColorSwitcherState();
@@ -18,13 +19,22 @@ class ImageColorSwitcher extends StatefulWidget {
 
 class _ImageColorSwitcherState extends State<ImageColorSwitcher> {
   /// Holds the Image in Byte Format
-   Uint8List? imageBytes;
+  Uint8List? imageBytes;
 
   @override
-  void initState() {
-    rootBundle.load(widget.imagePath).then(
-        (data) => setState(() => this.imageBytes = data.buffer.asUint8List()));
-
+  Future<void> initState() async {
+    if( widget.networkImage != null) {
+      // Load the image from network
+       imageBytes = (await NetworkAssetBundle(Uri.parse(widget.networkImage!))
+        .load(widget.networkImage!))
+        .buffer
+        .asUint8List();
+    }
+    else if (widget.imagePath != null) {
+      // Load the image from assets
+      rootBundle.load(widget.imagePath!).then(
+              (data) => setState(() => this.imageBytes = data.buffer.asUint8List()));
+    }
     super.initState();
   }
 
@@ -35,7 +45,7 @@ class _ImageColorSwitcherState extends State<ImageColorSwitcher> {
     if (image == null) return null;
 
     // Convert the [Image] to RGBA formatted pixels
-    final pixels = image.getBytes() ;
+    final pixels = image.getBytes();
 
     // Get the Pixel Length
     final int length = pixels.lengthInBytes;
