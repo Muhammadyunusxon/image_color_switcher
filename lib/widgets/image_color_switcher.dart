@@ -22,20 +22,24 @@ class _ImageColorSwitcherState extends State<ImageColorSwitcher> {
   Uint8List? imageBytes;
 
   @override
-  Future<void> initState() async {
-    if( widget.networkImage != null) {
-      // Load the image from network
-       imageBytes = (await NetworkAssetBundle(Uri.parse(widget.networkImage!))
-        .load(widget.networkImage!))
-        .buffer
-        .asUint8List();
-    }
-    else if (widget.imagePath != null) {
-      // Load the image from assets
-      rootBundle.load(widget.imagePath!).then(
-              (data) => setState(() => this.imageBytes = data.buffer.asUint8List()));
-    }
+  void initState() {
+    loadImage();
     super.initState();
+  }
+
+  loadImage() async {
+    if (widget.networkImage != null) {
+      // Load the image from network
+      imageBytes = (await NetworkAssetBundle(Uri.parse(widget.networkImage!))
+              .load(widget.networkImage!))
+          .buffer
+          .asUint8List();
+      setState(() {});
+    } else if (widget.imagePath != null) {
+      // Load the image from assets
+      rootBundle.load(widget.imagePath!).then((data) =>
+          setState(() => this.imageBytes = data.buffer.asUint8List()));
+    }
   }
 
   /// A function that switches the image Color.

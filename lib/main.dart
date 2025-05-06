@@ -72,7 +72,8 @@ class _MyAppState extends State<MyApp> {
               Column(children: [
                 Expanded(
                     child: ImageColorSwitcher(
-                  imagePath: 'assets/bike.png',
+                  // imagePath: 'assets/bike.png',
+                      networkImage: "https://foodyman.s3.amazonaws.com/public/images/other/103-17465146597939.png",
                   color: colorCode ?? Colors.red,
                 )),
                 Expanded(
